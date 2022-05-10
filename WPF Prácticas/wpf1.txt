@@ -1,0 +1,262 @@
+// WPF
+
+// Botones. 
+
+<StackPanel>
+        <Button Content="Ok" Margin="15" Width="150" HorizontalAlignment="Left"></Button>
+        <Button Content="MODIFICAR" Margin="15" Width="150" HorizontalAlignment="Left"></Button>
+        <Button Content="CANCELAR" Margin="15" Width="150" HorizontalAlignment="Left"></Button>
+</StackPanel> 
+
+/*******************************************************************************************/
+
+// Columnas y botones.
+
+ <Grid>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0">Botón 1</Button>
+            <Button Grid.Column="1" Grid.Row="0">Botón 2</Button>
+            <Button Grid.Column="2" Grid.Row="0">Botón 3</Button>
+            <Button Grid.Column="3" Grid.Row="0">Botón 4</Button>
+            
+            <Button Grid.Column="0" Grid.Row="1">Botón 5</Button>
+            <Button Grid.Column="1" Grid.Row="1">Botón 6</Button>
+            <Button Grid.Column="2" Grid.Row="1">Botón 7</Button>
+            <Button Grid.Column="3" Grid.Row="1">Botón 8</Button>
+
+            <Button Grid.Column="0" Grid.Row="2">Botón 9</Button>
+            <Button Grid.Column="1" Grid.Row="2">Botón 10</Button>
+            <Button Grid.Column="2" Grid.Row="2">Botón 11</Button>
+            <Button Grid.Column="3" Grid.Row="2">Botón 12</Button>   
+
+	<TextBlock Grid.ColumnSpan="4" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+	
+	 <Grid Grid.Column="0" Grid.Row="3">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0">Botón 1b</Button>
+            <Button Grid.Column="1" Grid.Row="0">Botón 2b</Button>
+            <Button Grid.Column="2" Grid.Row="0">Botón 3b</Button>
+            <Button Grid.Column="3" Grid.Row="0">Botón 4b</Button>
+            
+        </Grid>
+ </Grid>
+
+/*******************************************************************************************/
+
+// Dependency properties.
+
+<Grid>
+        <Button Height="150" Width="300" Content="OK" Background="LightBlue">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="FontSize" Value="25">
+                                
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+	
+	
+// Propiedad.
+        public int MiProperty
+        {
+            get {return (int)GetValue(miDependencyProperty) }
+            set { SetValue(miDependencyProperty, value); }
+        }
+
+
+        // Dependencia.
+        public static readonly DependencyProperty miDependencyProperty = DependencyProperty.Register("MiProperty", typeof(int), typeof(MainWindow), new PropertyMetadata(0));
+		
+/*******************************************************************************************/
+
+// Data Binding (Puente o enlace)
+
+ <StackPanel>
+        <TextBox Width="100" Name="MiCuadro" Margin="160" Text="{Binding ElementName=MiSlider, Path=Value,Mode=TwoWay}"></TextBox>
+        <Slider Width="350" Name="MiSlider" Minimum="0" Maximum="100"></Slider>
+    </StackPanel>
+		
+		
+/*******************************************************************************************/
+
+// INotifyPropertyChanged
+
+Se notifica un cambio en una propiedad en concreto.
+
+Ejemplo con tres cajas de Texto. 
+
+ public class JuntarNombre : INotifyPropertyChanged
+    {
+
+        private string nombre, apellido, nombre_completo;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value;
+                OnPropertyChanged("Nombre_completo");
+            }
+        }
+
+        public string Apellido
+        {
+            get { return apellido; }
+            set { apellido = value;
+                // Si tiene cambio la caja de texto se aplica al textBox3 Nombre Completo.
+                OnPropertyChanged("Nombre_completo");    
+            }
+        }
+
+        public string Nombre_completo
+        {
+            get { nombre_completo = Nombre + " " + Apellido;
+                return nombre_completo;
+            }
+            set { }
+        }
+    }
+} 
+____________________________________________
+
+public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            JuntarNombreYApellido = new JuntarNombre { Nombre = "Facundo", Apellido = "Romani" };
+
+            this.DataContext = JuntarNombreYApellido;
+        }
+
+        public JuntarNombre JuntarNombreYApellido;
+    }
+
+/*******************************************************************************************/
+
+// ListBox 
+
+
+ <Grid>
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            
+        </Grid.RowDefinitions>
+
+        <ListBox Name="listaPoblaciones" HorizontalContentAlignment="Stretch">
+            
+            <ListBox.ItemTemplate>
+                
+                <DataTemplate>
+                    
+                    <Grid Margin="2">
+                        
+                        <Grid.ColumnDefinitions >
+                            
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="{Binding Poblacion1}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Temperatura1}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Poblacion2}"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="{Binding Temperatura2}"></TextBlock>
+                        
+                    </Grid>
+                    
+                </DataTemplate>
+                
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+        
+        <Button Grid.Row="1" Click="Button_Click">Ver Información</Button>
+        
+    </Grid>	
+	
+______________________________________________________________
+
+ public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            List<Poblaciones> listaPob = new List<Poblaciones>();
+
+            listaPob.Add(new Poblaciones() { Poblacion1 = "Madrid", Poblacion2 = "Barcelona", Temperatura1 = 25, Temperatura2 = 15 , DiferenciaTemp = 10 });
+            listaPob.Add(new Poblaciones() { Poblacion1 = "Valencia", Poblacion2 = "Alicante", Temperatura1 = 30, Temperatura2 = 10, DiferenciaTemp = 20 });
+            listaPob.Add(new Poblaciones() { Poblacion1 = "Málaga", Poblacion2 = "Bilbao", Temperatura1 = 25, Temperatura2 = 15, DiferenciaTemp = 10 });
+            listaPob.Add(new Poblaciones() { Poblacion1 = "Sevilla", Poblacion2 = "Coruña", Temperatura1 = 5, Temperatura2 = 10, DiferenciaTemp = 5 });
+            listaPoblaciones.ItemsSource = listaPob;
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (listaPoblaciones.SelectedItem != null) 
+            { 
+                MessageBox.Show(((Poblaciones)(listaPoblaciones.SelectedItem)).Poblacion1 + " " +
+                           ((Poblaciones)(listaPoblaciones.SelectedItem)).Temperatura1 + " ºC " +
+                           ((Poblaciones)(listaPoblaciones.SelectedItem)).Poblacion2 + " " +
+                           ((Poblaciones)(listaPoblaciones.SelectedItem)).Temperatura2 + " ºC ");
+            } 
+            else
+            {
+                MessageBox.Show("Debes seleccionar un elemento.");
+            }
+        }
+    }
+
+    public class Poblaciones
+    {
+        public string Poblacion1 { get; set; }
+
+        public int Temperatura1 { get; set; }
+
+        public string Poblacion2 { get; set; }
+
+        public int Temperatura2 { get; set; }
+
+        public int DiferenciaTemp { get; set; }
+    }
+}
