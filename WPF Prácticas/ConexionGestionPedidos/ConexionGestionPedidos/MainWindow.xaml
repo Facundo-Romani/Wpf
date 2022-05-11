@@ -16,6 +16,7 @@
         <ListBox Name="pedidosClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="156" Margin="393,42,0,0"/>
         <ListBox Name="verPedidos" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="314" Margin="156,313,0,0" RenderTransformOrigin="0.713,0.671"/>
         <Label Content="Detalle pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,313,0,0"/>
+        <Button Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="67,353,0,0" RenderTransformOrigin="-0.413,2.8"/>
 
     </Grid>
 </Window>
