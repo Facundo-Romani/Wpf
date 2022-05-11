@@ -16,6 +16,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 
+
 namespace ConexionGestionPedidos
 {
     /// <summary>
@@ -23,8 +24,8 @@ namespace ConexionGestionPedidos
     /// </summary>
     public partial class MainWindow : Window
     {
-        
         SqlConnection conexion;
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +35,10 @@ namespace ConexionGestionPedidos
             conexion = new SqlConnection(miConexion);
 
             MuestraClientes();
+
+            MuestraDetalles();
         }
+
 
         // Método para mostrar datos de la Tabla.
         private void MuestraClientes ()
@@ -55,6 +59,7 @@ namespace ConexionGestionPedidos
                 listaClientes.ItemsSource = clientesTabla.DefaultView;
             }
         }
+
 
         // Método Ver pedidos en listBox.
         private void MuestraPedidos()
@@ -80,6 +85,30 @@ namespace ConexionGestionPedidos
             }
         }
 
+
+        // Método para ver detalles de pedidos.
+        private void MuestraDetalles()
+        {
+            string consulta = "SELECT CONCAT(cCliente , ' ' , fechaPedido , ' ' , formaPago ) AS INFOCOMPLETA FROM PEDIDO ";
+
+            SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta, conexion);
+
+            using (miAdaptadorSql)
+            {
+                DataTable pedidosDetalle = new DataTable();
+
+                // Fill método para rellenar la Tabla.
+                miAdaptadorSql.Fill(pedidosDetalle);
+
+                verPedidos.DisplayMemberPath = "INFOCOMPLETA";
+                verPedidos.SelectedValuePath = "Id";
+                verPedidos.ItemsSource = pedidosDetalle.DefaultView;
+            }
+
+        }
+
+
+        // Evento.
         private void listaClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MuestraPedidos();

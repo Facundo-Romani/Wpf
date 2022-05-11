@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConexionGestionPedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
-    
+        Title="MainWindow" Height="600" Width="600">
+
     <Grid Margin="10,10,4,-10">
 
         <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,33,0,0"/>
@@ -14,6 +14,8 @@
         <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,33,0,0" RenderTransformOrigin="0.846,0.808"/>
         <Label Content="Pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="9.947,2.231" Margin="321,33,0,0"/>
         <ListBox Name="pedidosClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="156" Margin="393,42,0,0"/>
+        <ListBox Name="verPedidos" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="314" Margin="156,313,0,0" RenderTransformOrigin="0.713,0.671"/>
+        <Label Content="Detalle pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,313,0,0"/>
 
     </Grid>
 </Window>
