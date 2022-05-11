@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace ConexionGestionPedidos
 {
@@ -26,6 +27,14 @@ namespace ConexionGestionPedidos
             InitializeComponent();
 
             string miConexion = ConfigurationManager.ConnectionStrings["ConexionGestionPedidos.Properties.Settings.GestionPedidosConnectionString"].ConnectionString;
+            
+            conexion = new SqlConnection(miConexion);
         }
+        private void MuestraClientes ()
+        {
+            string consulta = "SELECT * FROM CLIENTE";
+        }
+
+        SqlConnection conexion;
     }
 }
