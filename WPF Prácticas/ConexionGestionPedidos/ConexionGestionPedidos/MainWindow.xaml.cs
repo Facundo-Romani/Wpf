@@ -89,7 +89,7 @@ namespace ConexionGestionPedidos
         // Método para ver detalles de pedidos.
         private void MuestraDetalles()
         {
-            string consulta = "SELECT CONCAT(cCliente , ' ' , fechaPedido , ' ' , formaPago ) AS INFOCOMPLETA FROM PEDIDO ";
+            string consulta = "SELECT * , CONCAT (cCliente , ' ' , fechaPedido , ' ' , formaPago ) AS INFOCOMPLETA FROM PEDIDO ";
 
             SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta, conexion);
 
@@ -106,11 +106,29 @@ namespace ConexionGestionPedidos
             }
 
         }
+         
 
-
-        // Evento.
+        // Eventos.
         private void listaClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            MuestraPedidos();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show()
+            string consulta = "DELETE FROM PEDIDO WHERE Id = @PedidoId";
+
+            SqlCommand miSqlCommand = new SqlCommand(consulta , conexion);
+
+            conexion.Open();
+
+            miSqlCommand.Parameters.AddWithValue("@PedidoId", verPedidos.SelectedValue);
+
+            miSqlCommand.ExecuteNonQuery();
+
+            conexion.Close();
+
             MuestraPedidos();
         }
     }
