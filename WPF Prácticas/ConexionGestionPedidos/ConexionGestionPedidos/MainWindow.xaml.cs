@@ -43,67 +43,94 @@ namespace ConexionGestionPedidos
         // Método para mostrar datos de la Tabla.
         private void MuestraClientes ()
         {
-            string consulta = "SELECT * FROM cliente";
-
-            SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta , conexion);
-
-            using (miAdaptadorSql)
+            try
             {
-                DataTable clientesTabla = new DataTable();
-                
-                // Fill método para rellenar la Tabla.
-                miAdaptadorSql.Fill(clientesTabla);
+                string consulta = "SELECT * FROM cliente";
 
-                listaClientes.DisplayMemberPath = "nombre";
-                listaClientes.SelectedValuePath = "Id";
-                listaClientes.ItemsSource = clientesTabla.DefaultView;
+                SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta, conexion);
+
+                using (miAdaptadorSql)
+                {
+                    DataTable clientesTabla = new DataTable();
+
+                    // Fill método para rellenar la Tabla.
+                    miAdaptadorSql.Fill(clientesTabla);
+
+                    listaClientes.DisplayMemberPath = "nombre";
+                    listaClientes.SelectedValuePath = "Id";
+                    listaClientes.ItemsSource = clientesTabla.DefaultView;
+                }
             }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+            
         }
 
 
         // Método Ver pedidos en listBox.
         private void MuestraPedidos()
         {
-            string consulta = "SELECT * FROM Pedido P INNER JOIN CLIENTE C ON  C.Id = P.cCliente" + " WHERE C.Id = @ClienteId";
-
-            SqlCommand sqlComando = new SqlCommand(consulta, conexion);
-
-            SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(sqlComando);
-
-            using (miAdaptadorSql)
+            try
             {
-                sqlComando.Parameters.AddWithValue("@ClienteId" , listaClientes.SelectedValue);
+                string consulta = "SELECT * FROM Pedido P INNER JOIN CLIENTE C ON  C.Id = P.cCliente" + " WHERE C.Id = @ClienteId";
 
-                DataTable pedidos = new DataTable();
+                SqlCommand sqlComando = new SqlCommand(consulta, conexion);
 
-                // Fill método para rellenar la Tabla.
-                miAdaptadorSql.Fill(pedidos);
+                SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(sqlComando);
 
-                pedidosClientes.DisplayMemberPath = "fechaPedido";
-                pedidosClientes.SelectedValuePath = "Id";
-                pedidosClientes.ItemsSource = pedidos.DefaultView;
+                using (miAdaptadorSql)
+                {
+                    sqlComando.Parameters.AddWithValue("@ClienteId", listaClientes.SelectedValue);
+
+                    DataTable pedidos = new DataTable();
+
+                    // Fill método para rellenar la Tabla.
+                    miAdaptadorSql.Fill(pedidos);
+
+                    pedidosClientes.DisplayMemberPath = "fechaPedido";
+                    pedidosClientes.SelectedValuePath = "Id";
+                    pedidosClientes.ItemsSource = pedidos.DefaultView;
+                }
             }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+               
         }
 
 
         // Método para ver detalles de pedidos.
         private void MuestraDetalles()
         {
-            string consulta = "SELECT * , CONCAT (cCliente , ' ' , fechaPedido , ' ' , formaPago ) AS INFOCOMPLETA FROM PEDIDO ";
-
-            SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta, conexion);
-
-            using (miAdaptadorSql)
+            try
             {
-                DataTable pedidosDetalle = new DataTable();
+                string consulta = "SELECT * , CONCAT (cCliente , ' ' , fechaPedido , ' ' , formaPago ) AS INFOCOMPLETA FROM PEDIDO ";
 
-                // Fill método para rellenar la Tabla.
-                miAdaptadorSql.Fill(pedidosDetalle);
+                SqlDataAdapter miAdaptadorSql = new SqlDataAdapter(consulta, conexion);
 
-                verPedidos.DisplayMemberPath = "INFOCOMPLETA";
-                verPedidos.SelectedValuePath = "Id";
-                verPedidos.ItemsSource = pedidosDetalle.DefaultView;
+                using (miAdaptadorSql)
+                {
+                    DataTable pedidosDetalle = new DataTable();
+
+                    // Fill método para rellenar la Tabla. 
+                    miAdaptadorSql.Fill(pedidosDetalle);
+
+                    verPedidos.DisplayMemberPath = "INFOCOMPLETA";
+                    verPedidos.SelectedValuePath = "Id";
+                    verPedidos.ItemsSource = pedidosDetalle.DefaultView;
+                }
             }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+            
 
         }
          
