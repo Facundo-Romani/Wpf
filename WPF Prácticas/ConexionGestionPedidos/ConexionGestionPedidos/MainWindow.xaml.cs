@@ -75,7 +75,7 @@ namespace ConexionGestionPedidos
         {
             try
             {
-                string consulta = "SELECT * FROM Pedido P INNER JOIN CLIENTE C ON  C.Id = P.cCliente" + " WHERE C.Id = @ClienteId";
+                string consulta = "SELECT * FROM Pedido P INNER JOIN CLIENTE C ON  C.Id = P.cCliente" + " WHERE C.Id = @clienteId";
 
                 SqlCommand sqlComando = new SqlCommand(consulta, conexion);
 
@@ -83,7 +83,7 @@ namespace ConexionGestionPedidos
 
                 using (miAdaptadorSql)
                 {
-                    sqlComando.Parameters.AddWithValue("@ClienteId", listaClientes.SelectedValue);
+                    sqlComando.Parameters.AddWithValue("@clienteId", listaClientes.SelectedValue);
 
                     DataTable pedidos = new DataTable();
 
@@ -130,20 +130,18 @@ namespace ConexionGestionPedidos
 
                 MessageBox.Show(e.ToString());
             }
-            
-
+          
         }
          
 
         // Eventos.
-        private void listaClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MuestraPedidos();
-        }
+        //private void listaClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    MuestraPedidos();
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show()
             string consulta = "DELETE FROM PEDIDO WHERE Id = @PedidoId";
 
             SqlCommand miSqlCommand = new SqlCommand(consulta , conexion);
@@ -156,6 +154,47 @@ namespace ConexionGestionPedidos
 
             conexion.Close();
 
+            MuestraPedidos();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string insertar = "INSERT INTO Cliente(nombre) VALUES (@nombre)" ;
+
+            SqlCommand miSqlCommand = new SqlCommand(insertar, conexion);
+
+            conexion.Open();
+
+            miSqlCommand.Parameters.AddWithValue("@nombre", insertaCliente.Text);
+
+            miSqlCommand.ExecuteNonQuery();
+
+            conexion.Close();
+
+            MuestraClientes();
+
+            insertaCliente.Text = "";
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string consulta = "DELETE FROM CLIENTE WHERE Id = @clienteId";
+
+            SqlCommand miSqlCommand = new SqlCommand(consulta, conexion);
+
+            conexion.Open();
+
+            miSqlCommand.Parameters.AddWithValue("@clienteId", listaClientes.SelectedValue);
+
+            miSqlCommand.ExecuteNonQuery();
+
+            conexion.Close();
+
+            MuestraClientes();
+        }
+
+        private void listaClientes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
             MuestraPedidos();
         }
     }
