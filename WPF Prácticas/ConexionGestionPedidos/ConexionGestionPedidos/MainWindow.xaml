@@ -5,21 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConexionGestionPedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600" WindowStyle="ToolWindow">
+        Title="MainWindow" Height="600" Width="600" Background="#FF242A30">
 
-    <Grid Margin="10,10,4,7" Background="#FF677E7B">
+    <Grid Margin="-1,0,-7,-10" Background="#FF677E7B" FlowDirection="RightToLeft" VerticalAlignment="Top" Height="581">
 
-        <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,33,0,0"/>
-        <ListBox Name="listaClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="151" Margin="113,42,0,0" MouseDoubleClick="listaClientes_MouseDoubleClick"/>
+        <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="451,18,0,0" RenderTransformOrigin="0.173,0.731"/>
+        <ListBox Name="listaClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="183" Margin="320,44,0,0" MouseDoubleClick="listaClientes_MouseDoubleClick"/>
         <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-166,90,0,0" RenderTransformOrigin="0.846,0.808"/>
-        <Label Content="Pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="9.947,2.231" Margin="321,33,0,0"/>
-        <ListBox Name="pedidosClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="156" Margin="393,42,0,0"/>
-        <ListBox Name="verPedidos" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="314" Margin="156,313,0,0" RenderTransformOrigin="0.713,0.671"/>
-        <Label Content="Detalle pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,313,0,0"/>
-        <Button Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="67,355,0,0" RenderTransformOrigin="-0.413,2.8" Click="Button_Click"/>
-        <Button Content="Insertar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.653,7.45" Margin="21,75,0,0" Height="24" Click="Button_Click_1"/>
-        <Button Content="Borrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="21,115,0,0" RenderTransformOrigin="0.476,1.9" Height="24" Click="Button_Click_2"/>
-        <TextBox Name="insertaCliente" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" Margin="10,160,0,0"/>
+        <Label Content="Pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="9.947,2.231" Margin="205,18,0,0"/>
+        <ListBox Name="pedidosClientes" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="203" Margin="54,44,0,0"/>
+        <ListBox Name="verPedidos" HorizontalAlignment="Left" Height="167" VerticalAlignment="Top" Width="449" Margin="54,313,0,0" RenderTransformOrigin="0.713,0.671"/>
+        <Label Content="Detalle pedidos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,287,0,0"/>
+        <Button Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,497,0,0" RenderTransformOrigin="-0.413,2.8" Click="Button_Click"/>
+        <Button Content="Insertar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.653,7.45" Margin="517,135,0,0" Height="24" Click="Button_Click_1"/>
+        <Button Content="Borrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="517,99,0,0" RenderTransformOrigin="0.476,1.9" Height="24" Click="Button_Click_2"/>
+        <TextBox Name="insertaCliente" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Margin="517,61,0,0"/>
+        <Button Content="Actualizar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="517,175,0,0" Click="Button_Click_3"/>
 
     </Grid>
 </Window>
