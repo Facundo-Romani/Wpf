@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConexionGestionPedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600" Background="#FF242A30">
-
+        Title="MainWindow" Height="600" Width="600" Background="#FF242A30"
+        Activated="Window_Activated">
+        
     <Grid Margin="-1,0,-7,-10" Background="#FF677E7B" FlowDirection="RightToLeft" VerticalAlignment="Top" Height="581">
 
         <Label Content="Clientes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="451,18,0,0" RenderTransformOrigin="0.173,0.731"/>

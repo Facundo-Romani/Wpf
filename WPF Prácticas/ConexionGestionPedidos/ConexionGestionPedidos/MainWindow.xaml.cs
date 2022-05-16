@@ -197,8 +197,6 @@ namespace ConexionGestionPedidos
         {
             Actualiza ventanaActualizar = new Actualiza((int)listaClientes.SelectedValue);
 
-            ventanaActualizar.Show();
-
             try
             {
                 string consulta = "SELECT nombre FROM cliente WHERE Id = @clId";
@@ -223,6 +221,10 @@ namespace ConexionGestionPedidos
 
                 MessageBox.Show(e2.ToString());
             }
+
+            ventanaActualizar.ShowDialog();
+
+            MuestraClientes();
         }
 
         private void listaClientes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
